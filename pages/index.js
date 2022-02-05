@@ -124,8 +124,6 @@ Right click > Open image in new tab > Save image as... `)
                 <meta name="og:type" content={"website"} />
                 <meta name="og:url" content={"https://iwb.app"} />
                 <meta name="theme-color" content={"#475569"} />
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7806885462809506"
-                    crossOrigin="anonymous" />
                 <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} />
                 <script dangerouslySetInnerHTML={{
                     __html: `

@@ -353,7 +353,7 @@ Right click > Open image in new tab > Save image as... `)
                                 <div><code>1-4</code> - line thickness</div>
                                 <div>arrow keys - color</div>
                                 <div className={"p-4"} />
-                                <div>see it on <a href="https://github.com/qbxt/iwb" target="_blank" className={"underline"}>github</a></div>
+                                <div>see it on <a href="https://github.com/qbxt/iwb" target="_blank" rel="noreferrer" className={"underline"}>github</a></div>
                                 {/* <div><code>ctrl+z</code> - undo</div>
                                 <div><code>ctrl+y</code> - redo</div>
                                 <div><code>-</code> - zoom out</div>

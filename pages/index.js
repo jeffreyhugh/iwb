@@ -338,7 +338,7 @@ Right click > Open image in new tab > Save image as... `)
                                 <div className={"text-5xl self-center"}><span className={"font-semibold"}>iwb</span>.app</div>
                                 <div className={"self-center"}>infinite whiteboard</div>
                                 <div className={"p-4"} />
-                                <div>Just start drawing! Tools are on the left, colors are on the top.</div>
+                                <div>Just start drawing! Tools are on the right, colors are on the top.</div>
                                 <div className={"p-4"} />
                                 <div>Every pane is draggable and most are resizable.</div>
                                 <div className={"p-4"} />

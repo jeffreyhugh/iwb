@@ -3,6 +3,7 @@ import { ThemeProvider } from 'next-themes'
 import Head from 'next/head'
 import * as gtag from '../lib/gtag'
 import { useEffect } from 'react'
+import Router from 'next/router';
 
 function MyApp({ Component, pageProps }) {
     useEffect(() => {

@@ -1,8 +1,20 @@
 import '../styles/global.css'
 import { ThemeProvider } from 'next-themes'
 import Head from 'next/head'
+import * as gtag from '../lib/gtag'
+import { useEffect } from 'react'
 
 function MyApp({ Component, pageProps }) {
+    useEffect(() => {
+        const handleRouteChange = (url) => {
+            gtag.pageview(url);
+        };
+        Router.events.on('routeChangeComplete', handleRouteChange);
+        return () => {
+            Router.events.off('routeChangeComplete', handleRouteChange);
+        };
+    }, []);
+
     return (
         <ThemeProvider>
             <Head>

@@ -7,6 +7,8 @@ import tools from '../react-sketch/tools'
 import { GlobalHotKeys } from 'react-hotkeys'
 import { DateTime } from "luxon";
 
+import { GA_TRACKING_ID } from '../lib/gtag'
+
 const Index = () => {
 
     const SSR = typeof window === 'undefined'
@@ -122,6 +124,22 @@ Right click > Open image in new tab > Save image as... `)
                 <meta name="og:type" content={"website"} />
                 <meta name="og:url" content={"https://iwb.app"} />
                 <meta name="theme-color" content={"#475569"} />
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7806885462809506"
+                    crossOrigin="anonymous" />
+                <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} />
+                <script dangerouslySetInnerHTML={{
+                    __html: `
+                        window.dataLayer = window.dataLayer || [];
+                        function gtag(){dataLayer.push(arguments);}
+                        gtag('js', new Date());
+                        gtag('config', '${GA_TRACKING_ID}', {
+                            page_path: window.location.pathname,
+
+                            cookie_flags: 'SameSite=None;Secure',
+                        });
+                    `
+                }}
+                />
             </Head>
             <GlobalHotKeys keyMap={keyMap} handlers={handlers} />
             <div id="dark-mode-toggle" className={theme === 'dark' ? 'dark' : ''}>
@@ -145,7 +163,7 @@ Right click > Open image in new tab > Save image as... `)
                 { /* CONTROLS */}
                 {!SSR && sketchContainer.current !== null ?
                     <>
-                        { /* dark mode */ }
+                        { /* dark mode */}
                         <ToolBarWrapper
                             default={{
                                 x: window.innerWidth - 32 - 20,
@@ -166,7 +184,7 @@ Right click > Open image in new tab > Save image as... `)
                             </ToolBar>
                         </ToolBarWrapper>
 
-                        { /* main toolbar */ }
+                        { /* main toolbar */}
                         <ToolBarWrapper
                             default={{
                                 x: window.innerWidth - 20 - 32,
@@ -252,7 +270,7 @@ Right click > Open image in new tab > Save image as... `)
                             </ToolBar>
                         </ToolBarWrapper>
 
-                        { /* colors */ }
+                        { /* colors */}
                         <ToolBarWrapper
                             default={{
                                 x: window.innerWidth - 20 - 32 - 20 - 5 * 32,
@@ -276,7 +294,7 @@ Right click > Open image in new tab > Save image as... `)
                             </ToolBar>
                         </ToolBarWrapper>
 
-                        { /* undo, redo, zoom */ }
+                        { /* undo, redo, zoom */}
                         <ToolBarWrapper
                             default={{
                                 x: window.innerWidth - 20 - 4 * 32,
@@ -322,7 +340,7 @@ Right click > Open image in new tab > Save image as... `)
                             </ToolBar>
                         </ToolBarWrapper>
 
-                        { /* info */ }
+                        { /* info */}
                         <ToolBarWrapper
                             default={{
                                 x: 20,

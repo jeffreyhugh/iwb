@@ -23,12 +23,16 @@ export const ToolBar = ({ children, className }) => (
 
 export const Tool = ({ className, style, onClick, icon, title }) => (
     <div className={`w-8 h-8 rounded flex justify-center items-center ${className}`} title={title}>
-        <i className={`fa fa-fw fa-${icon}`} onClick={onClick} style={style} />
+        <a href={"#"} onClick={onClick}>
+            <i className={`fa fa-fw fa-${icon}`} style={style} />
+        </a>
     </div>
 )
 
 export const Color = ({ className, style, onClick, color }) => (
     <div className={`w-8 h-8 rounded flex justify-center items-center ${className}`}>
-        <i className={`fa fa-fw fa-circle`} onClick={onClick} style={{ ...style, color }} />
+        <a href={"#"} onClick={onClick}>
+            <i className={`fa fa-fw fa-circle`} onClick={onClick} style={{ ...style, color }} />
+        </a>
     </div>
 )

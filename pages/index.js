@@ -28,7 +28,7 @@ const Index = () => {
         '#ff00ff', // purple
         '#00ffff', // cyan
         '#ffa500', // orange
-        '#8b4513', // brown
+        '#8b4513', // brown1
         '#808080', // gray
         '#ffc0cb', // pink
         '#00ff7f', // lime
@@ -142,7 +142,7 @@ Right click > Open image in new tab > Save image as... `)
             <GlobalHotKeys keyMap={keyMap} handlers={handlers} />
             <div id="dark-mode-toggle" className={theme === 'dark' ? 'dark' : ''}>
                 { /* WHITEBOARD */}
-                <div className={"w-screen h-screen -z-10 absolute"}>
+                <div className={"w-full h-screen -z-10 absolute"}>
                     {!SSR ?
                         <SketchField
                             ref={sketchContainer}

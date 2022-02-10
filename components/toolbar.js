@@ -9,6 +9,7 @@ export const ToolBarWrapper = ({ default: d, enableResizing, lockAspectRatio, mi
         resizeGrid={[32, 32]}
         minHeight={minHeight}
         minWidth={minWidth}
+        cancel=".cancel"
         className={`absolute bg-slate-400 rounded overflow-hidden drop-shadow-2xl h-auto w-auto ${className}`}
     >
         {children}
@@ -23,16 +24,16 @@ export const ToolBar = ({ children, className }) => (
 
 export const Tool = ({ className, style, onClick, icon, title }) => (
     <div className={`w-8 h-8 rounded flex justify-center items-center ${className}`} title={title}>
-        <a href={"#"} onClick={onClick}>
+        <button className={"cancel"} onClick={onClick}>
             <i className={`fa fa-fw fa-${icon} cursor-pointer`} style={style} />
-        </a>
+        </button>
     </div>
 )
 
 export const Color = ({ className, style, onClick, color }) => (
     <div className={`w-8 h-8 rounded flex justify-center items-center ${className}`}>
-        <a href={"#"} onClick={onClick}>
+        <button className={"cancel"} onClick={onClick}>
             <i className={`fa fa-fw fa-circle cursor-pointer`} onClick={onClick} style={{ ...style, color }} />
-        </a>
+        </button>
     </div>
 )

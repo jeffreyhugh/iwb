@@ -46,7 +46,9 @@ const Index = () => {
     const sketchContainer = useRef(null)
 
     useEffect(() => {
-        sketchContainer.current?.enableTouchScroll()
+        !SSR ? window.onbeforeunload = (e) => (
+            "Are you sure you want to exit? Your work will be lost."
+        ) : nop()
     })
 
     const exportImage = () => {

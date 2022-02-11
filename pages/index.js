@@ -287,7 +287,10 @@ Right click > Open image in new tab > Save image as... `)
                                     <Color
                                         key={c}
                                         color={c}
-                                        onClick={() => setColor(colors.indexOf(c))}
+                                        onClick={() => {
+                                            setColor(colors.indexOf(c))
+                                            setTool(Tools.Pencil)
+                                        }}
                                         className={`${colors[color] === c ? "bg-slate-600" : ""}`}
                                     />
                                 ))}

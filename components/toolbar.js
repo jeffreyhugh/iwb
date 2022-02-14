@@ -10,7 +10,7 @@ export const ToolBarWrapper = ({ default: d, enableResizing, lockAspectRatio, mi
         minHeight={minHeight}
         minWidth={minWidth}
         cancel=".cancel"
-        className={`absolute backdrop-blur-sm ring-1 ring-gray-500 rounded overflow-hidden drop-shadow-2xl h-auto w-auto ${className}`}
+        className={`absolute backdrop-blur-sm ring-1 ring-gray-500 rounded overflow-hidden h-auto w-auto ${className}`}
     >
         {children}
     </Rnd>

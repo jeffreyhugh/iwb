@@ -43,6 +43,8 @@ const Index = () => {
     const [color, setColor] = useState(0)
     const [lineThickness, setLineThickness] = useState(2)
 
+    const [zenMode, setZenMode] = useState(false)
+
     const sketchContainer = useRef(null)
 
     useEffect(() => {
@@ -78,10 +80,12 @@ const Index = () => {
         REDO: ['ctrl+shift+z', 'command+shift+z', 'ctrl+y', 'command+y'],
         ZOOM_OUT: ['-', 'ctrl+-', 'command+-'],
         ZOOM_IN: ['=', 'ctrl+=', 'command+='],
-        TOGGLE_DARK: 'd',
+        TOGGLE_DARK: ['d'],
         DELETE_SELECTION: ['del', 'backspace'],
         COLOR_INCREMENT: ['right'],
         COLOR_DECREMENT: ['left'],
+        TOGGLE_ZEN: ['z'],
+        ZEN_OFF: ['esc'],
     }
 
     const handlers = {
@@ -128,6 +132,8 @@ const Index = () => {
         DELETE_SELECTION: () => sketchContainer.current?.removeSelected(),
         COLOR_INCREMENT: () => setColor(c => (c + 1) % colors.length),
         COLOR_DECREMENT: () => setColor(c => c === 0 ? colors.length - 1 : (c - 1) % colors.length),
+        TOGGLE_ZEN: () => setZenMode(z => !z),
+        ZEN_OFF: () => setZenMode(false),
     }
 
     return (
@@ -174,17 +180,17 @@ const Index = () => {
                 </div>
 
                 { /* CONTROLS */}
-                {!SSR && sketchContainer.current !== null ?
+                {!SSR && !zenMode && sketchContainer.current !== null ?
                     <>
-                        { /* dark mode */}
+                        { /* dark and zen mode */}
                         <ToolBarWrapper
                             default={{
                                 x: window.innerWidth - 32 - 20,
                                 y: 20,
-                                width: 'auto',
+                                width: 32,
                                 height: 'auto',
                             }}
-                            enableResizing={false}
+                            lockAspectRatio={false}
                             minHeight={32}
                             minWidth={32}
                         >
@@ -192,7 +198,12 @@ const Index = () => {
                                 <Tool
                                     icon="moon"
                                     onClick={() => setTheme(t => t === 'dark' ? 'light' : 'dark')}
-                                    title="Toggle dark mode"
+                                    title="Toggle dark mode (d)"
+                                />
+                                <Tool
+                                    icon="cloud"
+                                    onClick={() => setZenMode(z => !z)}
+                                    title="Toggle zen mode (z)"
                                 />
                             </ToolBar>
                         </ToolBarWrapper>
@@ -201,7 +212,7 @@ const Index = () => {
                         <ToolBarWrapper
                             default={{
                                 x: window.innerWidth - 20 - 32,
-                                y: 20 + 32 + 20,
+                                y: 20 + 32 + 32 + 20,
                                 height: 'auto',
                                 width: 32,
                             }}
@@ -372,6 +383,7 @@ const Index = () => {
                                 <div>Every pane is draggable and most are resizable.</div>
                                 <div className={"p-4"} />
                                 <div><code>d</code> - toggle <span className={"font-bold"}>d</span>ark mode</div>
+                                <div><code>z</code> - toggle <span className={"font-bold"}>z</span>en mode</div>
                                 <div><code>b</code> - paint<span className={"font-bold"}>b</span>rush</div>
                                 <div><code>t</code> - <span className={"font-bold"}>t</span>ext</div>
                                 <div><code>v</code> - mo<span className={"font-bold"}>v</span>e</div>

@@ -95,7 +95,7 @@ const Index = () => {
         TOOL_SELECT: () => setTool(tools.Select),
         TOOL_REMOVE: () => setTool(tools.Remove),
         TOOL_EXPORT: exportImage,
-        CLEAR: () => { confirm("Are you sure you want to clear the whiteboard?") && sketchContainer.current?.clear() },
+        CLEAR: () => { confirm("Are you sure you want to clear the whiteboard?") && sketchContainer.current?.clear();},
         LINE_THIN: () => setLineThickness(2),
         LINE_REGULAR: () => setLineThickness(4),
         LINE_THICC: () => setLineThickness(10),
@@ -163,7 +163,7 @@ const Index = () => {
             <GlobalHotKeys keyMap={keyMap} handlers={handlers} />
             <div id="dark-mode-toggle" className={theme === 'dark' ? 'dark' : ''}>
                 { /* WHITEBOARD */}
-                <div className={"w-full h-screen -z-10 absolute"}>
+                <div className={"w-full h-screen -z-10 absolute bg-white dark:bg-black"}>
                     {!SSR ?
                         <SketchField
                             ref={sketchContainer}
@@ -172,7 +172,6 @@ const Index = () => {
                             lineWidth={lineThickness}
                             undoSteps={20}
                             height={window.innerHeight}
-                            backgroundColor={theme === 'dark' ? 'black' : 'white'}
                             onSelectionCreated={nop}
                             onSelectionUpdated={nop}
                         /> : <></>
@@ -404,6 +403,62 @@ const Index = () => {
                         </ToolBarWrapper>
 
                     </> : null}
+
+                {/* zen mode */}
+                {!SSR && zenMode ?
+                    <>
+                        <ToolBarWrapper
+                            default={{
+                                x: window.innerWidth - 20 - 3 * 32,
+                                y: 20,
+                                height: 'auto',
+                                width: 3 * 32,
+                            }}
+                            lockAspectRatio={false}
+                            minHeight={32}
+                            minWidth={32}
+                        >
+                            <ToolBar>
+                                <Tool
+                                    icon="paint-brush"
+                                    className={`${tool === Tools.Pencil ? '' : 'hidden'}`}
+                                    title="Brush"
+                                />
+                                <Tool
+                                    icon="i-cursor"
+                                    className={`${tool === Tools.Text ? '' : 'hidden'}`}
+                                    title="Text"
+                                />
+                                <Tool
+                                    icon="arrows"
+                                    className={`${tool === Tools.Pan ? '' : 'hidden'}`}
+                                    title="Move"
+                                />
+                                <Tool
+                                    icon="hand-pointer-o"
+                                    className={`${tool === Tools.Select ? '' : 'hidden'}`}
+                                    title="Select"
+                                />
+                                <Tool
+                                    icon="trash"
+                                    className={`${tool === Tools.Remove ? '' : 'hidden'}`}
+                                    title="Remove"
+                                />
+                                {colors.map(c => (
+                                    <Color
+                                        key={c}
+                                        color={c}
+                                        className={`${colors[color] === c ? '' : 'hidden'}`}
+                                    />
+                                ))}
+                                <Tool
+                                    icon="cloud"
+                                    onClick={() => setZenMode(z => !z)}
+                                    title="Toggle zen mode (z)"
+                                />
+                            </ToolBar>
+                        </ToolBarWrapper>
+                    </> : <></>}
             </div>
         </div>
     )

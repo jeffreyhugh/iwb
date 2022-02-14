@@ -933,7 +933,6 @@ class SketchField extends PureComponent {
             // skipTargetFind: true
         });
 
-        canvas.objectCaching = false;
         canvas.renderAll();
 
 
@@ -981,6 +980,8 @@ class SketchField extends PureComponent {
         // zoom with ctrl+wheel
         // pan with wheel
         canvas.on('mouse:wheel', function (opt) {
+            const prevDrawingMode = canvas.isDrawingMode;
+            canvas.isDrawingMode = false;
             var evt = opt.e;
             if (evt.ctrlKey) {
                 var delta = opt.e.deltaY;
@@ -998,6 +999,7 @@ class SketchField extends PureComponent {
             canvas.renderAll();
             opt.e.preventDefault();
             opt.e.stopPropagation();
+            canvas.isDrawingMode = prevDrawingMode;
         })
 
         this.disableTouchScroll();

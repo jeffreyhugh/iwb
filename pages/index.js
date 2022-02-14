@@ -8,6 +8,7 @@ import { GlobalHotKeys } from 'react-hotkeys'
 import { DateTime } from "luxon";
 
 import { GA_TRACKING_ID } from '../lib/gtag'
+import dynamic from 'next/dynamic'
 
 const Index = () => {
 
@@ -107,10 +108,34 @@ Right click > Open image in new tab > Save image as... `)
         LINE_REGULAR: () => setLineThickness(4),
         LINE_THICC: () => setLineThickness(10),
         LINE_CHONKY: () => setLineThickness(20),
-        UNDO: () => sketchContainer.current?.undo(),
-        REDO: () => sketchContainer.current?.redo(),
-        ZOOM_OUT: () => sketchContainer.current?.zoom(0.8),
-        ZOOM_IN: () => sketchContainer.current?.zoom(1.25),
+        UNDO: () => {
+            const prevDrawingMode = sketchContainer.current._fc.isDrawingMode;
+            sketchContainer.current._fc.isDrawingMode = false;
+            sketchContainer.current.undo();
+            sketchContainer.current._fc.renderAll();
+            sketchContainer.current._fc.isDrawingMode = prevDrawingMode;
+        },
+        REDO: () => {
+            const prevDrawingMode = sketchContainer.current._fc.isDrawingMode;
+            sketchContainer.current._fc.isDrawingMode = false;
+            sketchContainer.current.redo();
+            sketchContainer.current._fc.renderAll();
+            sketchContainer.current._fc.isDrawingMode = prevDrawingMode;
+        },
+        ZOOM_OUT: () => {
+            const prevDrawingMode = sketchContainer.current._fc.isDrawingMode;
+            sketchContainer.current._fc.isDrawingMode = false;
+            sketchContainer.current.zoom(0.8);
+            sketchContainer.current._fc.renderAll();
+            sketchContainer.current._fc.isDrawingMode = prevDrawingMode;
+        },
+        ZOOM_IN: () => {
+            const prevDrawingMode = sketchContainer.current._fc.isDrawingMode;
+            sketchContainer.current._fc.isDrawingMode = false;
+            sketchContainer.current.zoom(1.25);
+            sketchContainer.current._fc.renderAll();
+            sketchContainer.current._fc.isDrawingMode = prevDrawingMode;
+        },
         TOGGLE_DARK: () => setTheme(theme => theme === 'dark' ? 'light' : 'dark'),
         DELETE_SELECTION: () => sketchContainer.current?.removeSelected(),
         COLOR_INCREMENT: () => setColor(c => (c + 1) % colors.length),
@@ -315,7 +340,7 @@ Right click > Open image in new tab > Save image as... `)
                                     // className={`${sketchContainer.current.canUndo() ? "" : "text-gray-500 cursor-not-allowed"}`}
                                     // onClick={sketchContainer.current.canUndo() ? () => sketchContainer.current.undo() : () => { }}
                                     onClick={() => {
-                                        try { sketchContainer.current.undo() }
+                                        try { handlers.UNDO() }
                                         catch (e) { }
                                     }}
                                     title="Undo"
@@ -325,19 +350,19 @@ Right click > Open image in new tab > Save image as... `)
                                     // className={`${sketchContainer.current.canRedo() ? "" : "text-gray-500 cursor-not-allowed"}`}
                                     // onClick={sketchContainer.current.canRedo() ? () => sketchContainer.current.redo() : () => { }}
                                     onClick={() => {
-                                        try { sketchContainer.current.redo() }
+                                        try { handlers.REDO() }
                                         catch (e) { }
                                     }}
                                     title="Redo"
                                 />
                                 <Tool
                                     icon="search-plus"
-                                    onClick={() => sketchContainer.current.zoom(1.25)}
+                                    onClick={() => handlers.ZOOM_IN()}
                                     title="Zoom In"
                                 />
                                 <Tool
                                     icon="search-minus"
-                                    onClick={() => sketchContainer.current.zoom(0.8)}
+                                    onClick={() => handlers.ZOOM_OUT()}
                                     title="Zoom Out"
                                 />
                             </ToolBar>

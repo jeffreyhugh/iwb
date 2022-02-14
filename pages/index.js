@@ -18,7 +18,6 @@ const Index = () => {
 
     const { theme, setTheme } = useTheme()
     const [tool, setTool] = useState(Tools.Pencil)
-    // const [color, setColor] = useState('#000000')
     const [colors, setColors] = useState([
         '#000000', // black
         '#ff0000', // red
@@ -29,7 +28,7 @@ const Index = () => {
         '#ff00ff', // purple
         '#00ffff', // cyan
         '#ffa500', // orange
-        '#8b4513', // brown1
+        '#8b4513', // brown
         '#808080', // gray
         '#ffc0cb', // pink
         '#00ff7f', // lime
@@ -55,23 +54,12 @@ const Index = () => {
     const exportImage = () => {
         const dataURL = sketchContainer.current.toDataURL()
         const url = dataURL.replace(/^data:image\/[^;]+/, 'data:application/octet-stream');
-        // window.open(url);
         var link = document.createElement('a');
         link.setAttribute("download", `iwb-${DateTime.now().toFormat("yyyy-LL-dd-HH-mm-ss")}.png`);
         link.setAttribute("href", url);
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(document.body.lastChild);
-    }
-
-    const exportImageOld = () => {
-        const newTab = window.open()
-        newTab.document.body.style = 'margin: 0;'
-        newTab.document.body.innerHTML = `<img src=${sketchContainer.current.toDataURL()} width=${window.innerWidth} height=${window.innerHeight}>`
-        newTab.alert(`==========
-TO SAVE IMAGE
-==========
-Right click > Open image in new tab > Save image as... `)
     }
 
     const keyMap = {
@@ -224,35 +212,30 @@ Right click > Open image in new tab > Save image as... `)
                             <ToolBar>
                                 <Tool
                                     icon="paint-brush"
-                                    // className={`${tool === Tools.Pencil ? "bg-slate-600" : ""}`}
                                     onClick={() => setTool(Tools.Pencil)}
                                     selected={tool === Tools.Pencil}
                                     title="Brush (b)"
                                 />
                                 <Tool
                                     icon="i-cursor"
-                                    // className={`${tool === Tools.Text ? "bg-slate-600" : ""}`}
                                     onClick={() => setTool(Tools.Text)}
                                     selected={tool === Tools.Text}
                                     title="Text (t)"
                                 />
                                 <Tool
                                     icon="arrows"
-                                    // className={`${tool === Tools.Pan ? "bg-slate-600" : ""}`}
                                     onClick={() => setTool(Tools.Pan)}
                                     selected={tool === Tools.Pan}
                                     title="Move (v)"
                                 />
                                 <Tool
                                     icon="hand-pointer-o"
-                                    // className={`${tool === Tools.Select ? "bg-slate-600" : ""}`}
                                     onClick={() => setTool(Tools.Select)}
                                     selected={tool === Tools.Select}
                                     title="Select (s)"
                                 />
                                 <Tool
                                     icon="trash"
-                                    // className={`${tool === Tools.Remove ? "bg-slate-600" : ""}`}
                                     onClick={() => setTool(Tools.Remove)}
                                     selected={tool === Tools.Remove}
                                     title="Remove (r)"
@@ -260,7 +243,6 @@ Right click > Open image in new tab > Save image as... `)
                                 <Tool
                                     icon="image"
                                     onClick={exportImage}
-                                    // onClick={() => console.log(sketchContainer.current.toDataURL())}
                                     title="Export (e)"
                                 />
                                 <Tool
@@ -272,7 +254,6 @@ Right click > Open image in new tab > Save image as... `)
                                 <Tool
                                     icon="circle"
                                     style={{ fontSize: '0.8rem' }}
-                                    // className={`${lineThickness === 2 ? "bg-slate-600" : ""}`}
                                     onClick={() => setLineThickness(2)}
                                     selected={lineThickness === 2}
                                     title="Thin (1)"
@@ -280,7 +261,6 @@ Right click > Open image in new tab > Save image as... `)
                                 <Tool
                                     icon="circle"
                                     style={{ fontSize: '1.1rem' }}
-                                    // className={`${lineThickness === 4 ? "bg-slate-600" : ""}`}
                                     onClick={() => setLineThickness(4)}
                                     selected={lineThickness === 4}
                                     title="Regular (2)"
@@ -288,7 +268,6 @@ Right click > Open image in new tab > Save image as... `)
                                 <Tool
                                     icon="circle"
                                     style={{ fontSize: '1.4rem' }}
-                                    // className={`${lineThickness === 10 ? "bg-slate-600" : ""}`}
                                     onClick={() => setLineThickness(10)}
                                     selected={lineThickness === 10}
                                     title="Thicc (3)"
@@ -296,7 +275,6 @@ Right click > Open image in new tab > Save image as... `)
                                 <Tool
                                     icon="circle"
                                     style={{ fontSize: '1.75rem' }}
-                                    // className={`${lineThickness === 20 ? "bg-slate-600" : ""}`}
                                     onClick={() => setLineThickness(20)}
                                     selected={lineThickness === 20}
                                     title="Chonky (4)"
@@ -325,7 +303,6 @@ Right click > Open image in new tab > Save image as... `)
                                             setColor(colors.indexOf(c))
                                             setTool(Tools.Pencil)
                                         }}
-                                        // className={`${colors[color] === c ? "bg-slate-600" : ""}`}
                                         selected={colors[color] === c}
                                     />
                                 ))}
@@ -347,8 +324,6 @@ Right click > Open image in new tab > Save image as... `)
                             <ToolBar>
                                 <Tool
                                     icon="undo"
-                                    // className={`${sketchContainer.current.canUndo() ? "" : "text-gray-500 cursor-not-allowed"}`}
-                                    // onClick={sketchContainer.current.canUndo() ? () => sketchContainer.current.undo() : () => { }}
                                     onClick={() => {
                                         try { handlers.UNDO() }
                                         catch (e) { }
@@ -357,8 +332,6 @@ Right click > Open image in new tab > Save image as... `)
                                 />
                                 <Tool
                                     icon="undo fa-flip-horizontal"
-                                    // className={`${sketchContainer.current.canRedo() ? "" : "text-gray-500 cursor-not-allowed"}`}
-                                    // onClick={sketchContainer.current.canRedo() ? () => sketchContainer.current.redo() : () => { }}
                                     onClick={() => {
                                         try { handlers.REDO() }
                                         catch (e) { }

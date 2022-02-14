@@ -163,7 +163,7 @@ const Index = () => {
             <GlobalHotKeys keyMap={keyMap} handlers={handlers} />
             <div id="dark-mode-toggle" className={theme === 'dark' ? 'dark' : ''}>
                 { /* WHITEBOARD */}
-                <div className={"w-full h-screen -z-10 absolute bg-white dark:bg-black"}>
+                <div className={"w-full h-screen -z-10 absolute bg-black"}>
                     {!SSR ?
                         <SketchField
                             ref={sketchContainer}
@@ -174,6 +174,7 @@ const Index = () => {
                             height={window.innerHeight}
                             onSelectionCreated={nop}
                             onSelectionUpdated={nop}
+                            backgroundColor={theme === 'dark' ? '#000001' : '#fff'}
                         /> : <></>
                     }
                 </div>

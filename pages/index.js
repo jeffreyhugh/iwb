@@ -224,32 +224,37 @@ Right click > Open image in new tab > Save image as... `)
                             <ToolBar>
                                 <Tool
                                     icon="paint-brush"
-                                    className={`${tool === Tools.Pencil ? "bg-slate-600" : ""}`}
+                                    // className={`${tool === Tools.Pencil ? "bg-slate-600" : ""}`}
                                     onClick={() => setTool(Tools.Pencil)}
+                                    selected={tool === Tools.Pencil}
                                     title="Brush (b)"
                                 />
                                 <Tool
                                     icon="i-cursor"
-                                    className={`${tool === Tools.Text ? "bg-slate-600" : ""}`}
+                                    // className={`${tool === Tools.Text ? "bg-slate-600" : ""}`}
                                     onClick={() => setTool(Tools.Text)}
+                                    selected={tool === Tools.Text}
                                     title="Text (t)"
                                 />
                                 <Tool
                                     icon="arrows"
-                                    className={`${tool === Tools.Pan ? "bg-slate-600" : ""}`}
+                                    // className={`${tool === Tools.Pan ? "bg-slate-600" : ""}`}
                                     onClick={() => setTool(Tools.Pan)}
+                                    selected={tool === Tools.Pan}
                                     title="Move (v)"
                                 />
                                 <Tool
                                     icon="hand-pointer-o"
-                                    className={`${tool === Tools.Select ? "bg-slate-600" : ""}`}
+                                    // className={`${tool === Tools.Select ? "bg-slate-600" : ""}`}
                                     onClick={() => setTool(Tools.Select)}
+                                    selected={tool === Tools.Select}
                                     title="Select (s)"
                                 />
                                 <Tool
                                     icon="trash"
-                                    className={`${tool === Tools.Remove ? "bg-slate-600" : ""}`}
+                                    // className={`${tool === Tools.Remove ? "bg-slate-600" : ""}`}
                                     onClick={() => setTool(Tools.Remove)}
+                                    selected={tool === Tools.Remove}
                                     title="Remove (r)"
                                 />
                                 <Tool
@@ -267,29 +272,33 @@ Right click > Open image in new tab > Save image as... `)
                                 <Tool
                                     icon="circle"
                                     style={{ fontSize: '0.8rem' }}
-                                    className={`${lineThickness === 2 ? "bg-slate-600" : ""}`}
+                                    // className={`${lineThickness === 2 ? "bg-slate-600" : ""}`}
                                     onClick={() => setLineThickness(2)}
+                                    selected={lineThickness === 2}
                                     title="Thin (1)"
                                 />
                                 <Tool
                                     icon="circle"
                                     style={{ fontSize: '1.1rem' }}
-                                    className={`${lineThickness === 4 ? "bg-slate-600" : ""}`}
+                                    // className={`${lineThickness === 4 ? "bg-slate-600" : ""}`}
                                     onClick={() => setLineThickness(4)}
+                                    selected={lineThickness === 4}
                                     title="Regular (2)"
                                 />
                                 <Tool
                                     icon="circle"
                                     style={{ fontSize: '1.4rem' }}
-                                    className={`${lineThickness === 10 ? "bg-slate-600" : ""}`}
+                                    // className={`${lineThickness === 10 ? "bg-slate-600" : ""}`}
                                     onClick={() => setLineThickness(10)}
+                                    selected={lineThickness === 10}
                                     title="Thicc (3)"
                                 />
                                 <Tool
                                     icon="circle"
                                     style={{ fontSize: '1.75rem' }}
-                                    className={`${lineThickness === 20 ? "bg-slate-600" : ""}`}
+                                    // className={`${lineThickness === 20 ? "bg-slate-600" : ""}`}
                                     onClick={() => setLineThickness(20)}
+                                    selected={lineThickness === 20}
                                     title="Chonky (4)"
                                 />
                             </ToolBar>
@@ -316,7 +325,8 @@ Right click > Open image in new tab > Save image as... `)
                                             setColor(colors.indexOf(c))
                                             setTool(Tools.Pencil)
                                         }}
-                                        className={`${colors[color] === c ? "bg-slate-600" : ""}`}
+                                        // className={`${colors[color] === c ? "bg-slate-600" : ""}`}
+                                        selected={colors[color] === c}
                                     />
                                 ))}
                             </ToolBar>
@@ -380,7 +390,7 @@ Right click > Open image in new tab > Save image as... `)
                             minHeight={32}
                             minWidth={32}
                         >
-                            <div className={"p-8 flex flex-col text-black"}>
+                            <div className={"p-8 flex flex-col text-black dark:text-white"}>
                                 <div className={"text-5xl self-center"}><span className={"font-semibold"}>iwb</span>.app</div>
                                 <div className={"self-center"}>infinite whiteboard</div>
                                 <div className={"p-4"} />

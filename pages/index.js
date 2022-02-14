@@ -16,6 +16,8 @@ const Index = () => {
 
     const nop = () => { }
 
+    const BORDER = 32
+
     const { theme, setTheme } = useTheme()
     const [tool, setTool] = useState(Tools.Pencil)
     const [colors, setColors] = useState([
@@ -185,8 +187,8 @@ const Index = () => {
                         { /* dark and zen mode */}
                         <ToolBarWrapper
                             default={{
-                                x: window.innerWidth - 32 - 20,
-                                y: 20,
+                                x: window.innerWidth - 32 - BORDER,
+                                y: BORDER,
                                 width: 32,
                                 height: 'auto',
                             }}
@@ -211,8 +213,8 @@ const Index = () => {
                         { /* main toolbar */}
                         <ToolBarWrapper
                             default={{
-                                x: window.innerWidth - 20 - 32,
-                                y: 20 + 32 + 32 + 20,
+                                x: window.innerWidth - BORDER - 32,
+                                y: BORDER + 32 + 32 + BORDER,
                                 height: 'auto',
                                 width: 32,
                             }}
@@ -296,8 +298,8 @@ const Index = () => {
                         { /* colors */}
                         <ToolBarWrapper
                             default={{
-                                x: window.innerWidth - 20 - 32 - 20 - 5 * 32,
-                                y: 20,
+                                x: window.innerWidth - BORDER - 32 - BORDER - 5 * 32,
+                                y: BORDER,
                                 height: 32,
                                 width: 5 * 32,
                             }}
@@ -323,8 +325,8 @@ const Index = () => {
                         { /* undo, redo, zoom */}
                         <ToolBarWrapper
                             default={{
-                                x: window.innerWidth - 20 - 4 * 32,
-                                y: window.innerHeight - 20 - 32,
+                                x: window.innerWidth - BORDER - 4 * 32,
+                                y: window.innerHeight - BORDER - 32,
                                 height: 32,
                                 width: 4 * 32,
                             }}
@@ -365,8 +367,8 @@ const Index = () => {
                         { /* info */}
                         <ToolBarWrapper
                             default={{
-                                x: 20,
-                                y: 20,
+                                x: BORDER,
+                                y: BORDER,
                                 height: 'auto',
                                 width: 8 * 32,
                             }}
@@ -410,8 +412,8 @@ const Index = () => {
                     <>
                         <ToolBarWrapper
                             default={{
-                                x: window.innerWidth - 20 - 3 * 32,
-                                y: 20,
+                                x: window.innerWidth - BORDER - 3 * 32,
+                                y: BORDER,
                                 height: 'auto',
                                 width: 3 * 32,
                             }}

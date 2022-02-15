@@ -1,6 +1,6 @@
 import { Rnd } from "react-rnd"
 
-export const ToolBarWrapper = ({ default: d, enableResizing, lockAspectRatio, minWidth, minHeight, className, id, children }) => (
+export const ToolBarWrapper = ({ default: d, enableResizing, lockAspectRatio, minWidth, minHeight, maxWidth, maxHeight, className, id, children }) => (
     <Rnd
         id={id}
         default={d}
@@ -9,6 +9,8 @@ export const ToolBarWrapper = ({ default: d, enableResizing, lockAspectRatio, mi
         resizeGrid={[32, 32]}
         minHeight={minHeight}
         minWidth={minWidth}
+        maxHeight={maxHeight}
+        maxWidth={maxWidth}
         cancel=".cancel"
         className={`absolute backdrop-blur-sm ring-1 ring-gray-500 rounded overflow-hidden h-auto w-auto ${className}`}
     >

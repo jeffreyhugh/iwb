@@ -8,7 +8,6 @@ import { GlobalHotKeys } from 'react-hotkeys'
 import { DateTime } from "luxon";
 
 import { GA_TRACKING_ID } from '../lib/gtag'
-import dynamic from 'next/dynamic'
 
 const Index = () => {
 
@@ -16,31 +15,52 @@ const Index = () => {
 
     const nop = () => { }
 
-    const BORDER = 32
+    const BORDER = 16
 
     const { theme, setTheme } = useTheme()
     const [tool, setTool] = useState(Tools.Pencil)
     const [colors, setColors] = useState([
-        '#000000', // black
-        '#ff0000', // red
-        '#00ff00', // green
-        '#0000ff', // blue
-        '#ffffff', // white
-        '#ffff00', // yellow
-        '#ff00ff', // purple
-        '#00ffff', // cyan
-        '#ffa500', // orange
-        '#8b4513', // brown
-        '#808080', // gray
-        '#ffc0cb', // pink
-        '#00ff7f', // lime
-        '#008080', // teal
-        '#808000', // olive
-        '#800000', // maroon
-        '#000080', // navy
-        '#4b0082', // indigo
-        '#ee82ee', // violet
-        '#d02090', // fuchsia
+        '#000001', // black
+        '#fe0000', // red
+        '#00fe00', // green
+        '#0000fe', // blue
+        '#fffffe', // white
+        // reds
+        '#ff8585',
+        '#ff4747',
+        '#ff0000',
+        '#cc0000',
+        '#8f0000',
+        // oranges
+        '#ffd458',
+        '#ffbf47',
+        '#ffa500',
+        '#cc8500',
+        '#8f5d00',
+        // yellows
+        '#ffff85',
+        '#ffff47',
+        '#ffff00',
+        '#cccc00',
+        '#8f8f00',
+        // greens
+        '#85ff85',
+        '#47ff47',
+        '#00ff00',
+        '#00cc00',
+        '#008f00',
+        // blues
+        '#8585ff',
+        '#4747ff',
+        '#0000ff',
+        '#0000cc',
+        '#00008f',
+        // purples
+        '#ff85ff',
+        '#ff47ff',
+        '#ff0aff',
+        '#cc00cc',
+        '#800080',
     ])
     const [color, setColor] = useState(0)
     const [lineThickness, setLineThickness] = useState(2)
@@ -84,8 +104,10 @@ const Index = () => {
         ZOOM_IN: ['=', 'ctrl+=', 'command+='],
         TOGGLE_DARK: ['d'],
         DELETE_SELECTION: ['del', 'backspace'],
-        COLOR_INCREMENT: ['right'],
-        COLOR_DECREMENT: ['left'],
+        COLOR_RIGHT: ['right'],
+        COLOR_LEFT: ['left'],
+        COLOR_UP: ['up'],
+        COLOR_DOWN: ['down'],
         TOGGLE_ZEN: ['z'],
         ZEN_OFF: ['esc'],
     }
@@ -132,8 +154,32 @@ const Index = () => {
         },
         TOGGLE_DARK: () => setTheme(theme => theme === 'dark' ? 'light' : 'dark'),
         DELETE_SELECTION: () => sketchContainer.current?.removeSelected(),
-        COLOR_INCREMENT: () => setColor(c => (c + 1) % colors.length),
-        COLOR_DECREMENT: () => setColor(c => c === 0 ? colors.length - 1 : (c - 1) % colors.length),
+        COLOR_RIGHT: () => setColor(c => {
+            setTool(tools.Pencil)
+            const row = Math.floor(c / 5)
+            const col = c % 5
+            return (col + 1) % 5 + row * 5
+        }),
+        COLOR_LEFT: () => setColor(c => {
+            setTool(tools.Pencil)
+            const row = Math.floor(c / 5)
+            const col = c % 5
+            return col === 0 ? (row * 5) + 4 : (col - 1) + row * 5
+        }),
+        COLOR_UP: () => setColor(c => {
+            setTool(tools.Pencil)
+            const row = Math.floor(c / 5)
+            const col = c % 5
+            const totalRows = Math.floor(colors.length / 5)
+            return row === 0 ? (totalRows - 1) * 5 + col : (row - 1) * 5 + col
+        }),
+        COLOR_DOWN: () => setColor(c => {
+            setTool(tools.Pencil)
+            const row = Math.floor(c / 5)
+            const col = c % 5
+            const totalRows = Math.floor(colors.length / 5)
+            return ((row + 1) % totalRows) * 5 + col
+        }),
         TOGGLE_ZEN: () => setZenMode(z => !z),
         ZEN_OFF: () => setZenMode(false),
     }
@@ -165,7 +211,7 @@ const Index = () => {
             <GlobalHotKeys keyMap={keyMap} handlers={handlers} />
             <div id="dark-mode-toggle" className={theme === 'dark' ? 'dark' : ''}>
                 { /* WHITEBOARD */}
-                <div className={"w-full h-screen -z-10 absolute bg-black"}>
+                <div className={"w-full h-screen -z-10 absolute"}>
                     {!SSR ?
                         <SketchField
                             ref={sketchContainer}
@@ -176,7 +222,7 @@ const Index = () => {
                             height={window.innerHeight}
                             onSelectionCreated={nop}
                             onSelectionUpdated={nop}
-                            backgroundColor={theme === 'dark' ? '#000001' : '#fff'}
+                            backgroundColor={theme === 'dark' ? '#000001' : '#fffffe'}
                         /> : <></>
                     }
                 </div>
@@ -306,6 +352,18 @@ const Index = () => {
                             lockAspectRatio={false}
                             minHeight={32}
                             minWidth={32}
+                            maxHeight={7 * 32}
+                            enableResizing={{
+                                // only allow resizing on the top and bottom
+                                top: true,
+                                bottom: true,
+                                left: false,
+                                right: false,
+                                topLeft: false,
+                                topRight: false,
+                                bottomLeft: false,
+                                bottomRight: false,
+                            }}
                         >
                             <ToolBar>
                                 {colors.map(c => (

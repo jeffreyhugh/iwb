@@ -8,4 +8,4 @@ A super straightforward infinite whiteboard.
 
 Try it now: [**iwb.app**](https://iwb.app)
 
-Thank you @tbolis and @nakusyat for your work on [react-sketch](https://github.com/nakusyat/react-sketch) which made this project 99% easier. Y'all are legends 👑
+Thank you [@tbolis](https://github.com/tbolis) and [@nakusyat](https://github.com/nakusyat) for your work on [react-sketch](https://github.com/nakusyat/react-sketch) which made this project 99% easier. Y'all are legends 👑

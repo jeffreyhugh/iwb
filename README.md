@@ -1,7 +1,11 @@
-# iwb.app - infinite whiteboard
+# [iwb.app](https://iwb.app) - infinite whiteboard
 
-A super straightforward infinite whiteboard
+[![Deploy on Vercel](https://img.shields.io/badge/Deploy-on%20Vercel-000?logo=vercel "Deploy on Vercel")](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fqbxt%2Fiwb&project-name=iwb&repository-name=iwb)
 
-[Try it out](https://iwb.app) or deploy your own with [Vercel](https://vercel.com)
+---
 
-Thank you so much [nakusyat](https://github.com/nakusyat/react-sketch) for doing 99% of this project
+A super straightforward infinite whiteboard. 
+
+Try it now: [**iwb.app**](https://iwb.app)
+
+Thank you @tbolis and @nakusyat for your work on [react-sketch](https://github.com/nakusyat/react-sketch) which made this project 99% easier. Y'all are legends 👑

@@ -10,10 +10,10 @@
   "dependencies": {
     "fabric": "^4.6.0",
     "luxon": "^2.3.0",
-    "next": "12.0.10",
-    "next-themes": "^0.0.15",
+    "next": "^12.1.4",
+    "next-themes": "0.0.15",
     "rc-tooltip": "^5.1.1",
-    "react": "17.0.2",
+    "react": "^17.0.2",
     "react-dom": "17.0.2",
     "react-hotkeys": "^2.0.0",
     "react-rnd": "^10.3.5",

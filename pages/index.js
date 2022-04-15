@@ -9,11 +9,8 @@ import { DateTime } from 'luxon';
 
 import { GA_TRACKING_ID } from '../lib/gtag';
 import Script from 'next/script';
-import { useDetectAdBlock } from 'adblock-detect-react';
 
 const Index = () => {
-  useDetectAdBlock();
-
   const SSR = typeof window === 'undefined';
 
   const nop = () => {};

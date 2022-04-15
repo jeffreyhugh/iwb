@@ -8,7 +8,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "adblock-detect-react": "^1.0.5",
     "fabric": "^4.6.0",
     "luxon": "^2.3.0",
     "next": "12.0.10",
